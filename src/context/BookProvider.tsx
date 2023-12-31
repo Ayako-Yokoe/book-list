@@ -20,7 +20,8 @@ export type Tag = {
 }
 
 export type BookAction =
-  | { type: "create"; payload: BookData }
+  | { type: "create"; payload: Book }
+  | { type: "update"; payload: Book }
   | { type: "delete"; payload: string }
   | { type: "restore"; payload: Book[] }
 
@@ -32,13 +33,27 @@ function reducer(state: Book[], action: BookAction): Book[] {
       return [
         ...state,
         {
-          id: uuidv4(),
+          id: action.payload.id,
           title: action.payload.title,
           author: action.payload.author,
           memo: action.payload.memo,
           tags: action.payload.tags,
         },
       ]
+    case "update":
+      return state.map((data) => {
+        if (data.id === action.payload.id) {
+          return {
+            ...data,
+            title: action.payload.title,
+            author: action.payload.author,
+            memo: action.payload.memo,
+            tags: action.payload.tags,
+          }
+        } else {
+          return data
+        }
+      })
     case "delete":
       return state.filter((data) => data.id !== action.payload)
     case "restore":

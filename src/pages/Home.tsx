@@ -8,10 +8,6 @@ const Home = () => {
       <HeaderCards />
       <button>Add New Book</button>
       <button>Edit Tags</button>
-      <form>
-        <input />
-        <div>title search</div>
-      </form>
       <BookList />
     </div>
   )
