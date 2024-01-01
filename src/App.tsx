@@ -7,22 +7,7 @@ import BookProvider from "./context/BookProvider"
 import TagProvider from "./context/TagProvider"
 import { BookLayout } from "./pages/BookLayout"
 import ShowBook from "./pages/ShowBook"
-
-// export type Book = {
-//     id: string;
-// } & BookData;
-
-// export type BookData = {
-//     title: string;
-//     author: string;
-//     memo?: string;
-//     tags: Tag[];
-// };
-
-// export type Tag = {
-//     id: string;
-//     label: string;
-// };
+import EditTags from "./pages/EditTags"
 
 function App() {
   return (
@@ -36,6 +21,7 @@ function App() {
               <Route index element={<ShowBook />} />
               <Route path="edit" element={<EditBook />} />
             </Route>
+            <Route path="/tags" element={<EditTags />} />
           </Routes>
         </TagProvider>
       </BookProvider>

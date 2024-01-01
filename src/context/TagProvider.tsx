@@ -1,56 +1,61 @@
-import { Dispatch, ReactNode } from "react";
-import TagContext from "./TagContext";
-import { useLocalStorageReducer } from "../storage/useLocalStorage";
+import { Dispatch, ReactNode } from "react"
+import TagContext from "./TagContext"
+import { useLocalStorageReducer } from "../storage/useLocalStorage"
 
 export type Tag = {
-    id: string;
-    label: string;
-};
+  id: string
+  label: string
+}
 
 export type TagAction =
-    | { type: "create"; payload: Tag }
-    | { type: "delete"; payload: string }
-    | { type: "restore"; payload: Tag[] };
+  | { type: "create"; payload: Tag }
+  | { type: "update"; payload: Tag }
+  | { type: "delete"; payload: string }
+  | { type: "restore"; payload: Tag[] }
 
-const initialState: Tag[] = [];
+const initialState: Tag[] = []
 
 function reducer(state: Tag[], action: TagAction): Tag[] {
-    switch (action.type) {
-        case "create":
-            return [
-                ...state,
-                { id: action.payload.id, label: action.payload.label },
-            ];
-        case "delete":
-            return state.filter((data) => data.id !== action.payload);
-        case "restore":
-            return action.payload;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "create":
+      return [...state, { id: action.payload.id, label: action.payload.label }]
+    case "update":
+      return state.map((data) => {
+        if (data.id === action.payload.id) {
+          return {
+            ...data,
+            label: action.payload.label,
+          }
+        } else {
+          return data
+        }
+      })
+    case "delete":
+      return state.filter((data) => data.id !== action.payload)
+    case "restore":
+      return action.payload
+    default:
+      return state
+  }
 }
 
 export interface TagContextType {
-    tags: Tag[];
-    dispatch: Dispatch<TagAction>;
+  tags: Tag[]
+  dispatch: Dispatch<TagAction>
 }
 
 interface TagProviderProps {
-    children: ReactNode;
+  children: ReactNode
 }
 
 const TagProvider = ({ children }: TagProviderProps) => {
-    const [tags, dispatch] = useLocalStorageReducer(
-        "TAGS",
-        reducer,
-        initialState
-    );
+  const [tags, dispatch] = useLocalStorageReducer("TAGS", reducer, initialState)
 
-    return (
-        <TagContext.Provider value={{ tags, dispatch }}>
-            {children}
-        </TagContext.Provider>
-    );
-};
+  return (
+    <TagContext.Provider value={{ tags, dispatch }}>
+      {children}
+    </TagContext.Provider>
+  )
+}
 
-export default TagProvider;
+export default TagProvider
