@@ -36,3 +36,15 @@
 .button-home {
   @apply text-white rounded px-3.5 py-3 lg:px-5 lg:py-5 cursor-pointer w-full text-sm md:text-xl text-center;
 }
+
+.input-field {
+  @apply px-2 py-1 outline-none rounded pt-1.5 md:text-xl;
+}
+
+.primary-button {
+  @apply bg-indigoPrimary rounded text-white text-center md:text-xl py-4 cursor-pointer;
+}
+
+.secondary-button {
+  @apply rounded border-black border-2 text-center md:text-xl py-4 cursor-pointer;
+}

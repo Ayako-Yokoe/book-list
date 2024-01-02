@@ -3,7 +3,7 @@ import CreatableReactSelect from "react-select/creatable"
 import { v4 as uuidv4 } from "uuid"
 import { Link, useNavigate } from "react-router-dom"
 import { useBookContext } from "../context/BookContext"
-import { Book, BookData, Tag } from "../context/BookProvider"
+import { Book, Tag } from "../context/BookProvider"
 import { useTagContext } from "../context/TagContext"
 import { BookAction } from "../context/BookProvider"
 import { TagAction } from "../context/TagProvider"
@@ -59,13 +59,19 @@ const BookForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <div>
-          <label>Title</label>
-          <input type="text" ref={titleRef} defaultValue={title} required />
+      <div className="px-5 py-3.5 md:px-14 md:py-16 bg-blue rounded-lg box-shadow space-y-2.5">
+        <div className="flex flex-col">
+          <label className="md:text-xl">Title</label>
+          <input
+            type="text"
+            ref={titleRef}
+            defaultValue={title}
+            required
+            className="input-field"
+          />
         </div>
-        <div>
-          <label>Tag</label>
+        <div className="flex flex-col">
+          <label className="md:text-xl">Tag</label>
           <CreatableReactSelect
             onCreateOption={(label) => {
               const newTag = { id: uuidv4(), label }
@@ -88,19 +94,32 @@ const BookForm = ({
             isMulti
           />
         </div>
-        <div>
-          <label>Author</label>
-          <input type="text" ref={authorRef} defaultValue={author} required />
+        <div className="flex flex-col">
+          <label className="md:text-xl">Author</label>
+          <input
+            type="text"
+            ref={authorRef}
+            defaultValue={author}
+            required
+            className="input-field"
+          />
         </div>
-        <div>
-          <label>Memo</label>
-          <textarea rows={10} ref={memoRef} defaultValue={memo}></textarea>
+        <div className="flex flex-col">
+          <label className="md:text-xl">Memo</label>
+          <textarea
+            rows={10}
+            ref={memoRef}
+            defaultValue={memo}
+            className="input-field"
+          ></textarea>
         </div>
       </div>
-      <div>
-        <button type="submit">Save</button>
-        <Link to="..">
-          <button>Cancel</button>
+      <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-20 my-8 md:my-28">
+        <button type="submit" className="primary-button">
+          Save
+        </button>
+        <Link to=".." className="secondary-button">
+          Cancel
         </Link>
       </div>
     </form>
