@@ -13,3 +13,26 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 } */
+
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Acme", sans-serif;
+  font-family: "Sora", sans-serif;
+}
+
+.box-shadow {
+  box-shadow: 4px 6px 0 0 rgba(0, 0, 0, 0.9);
+}
+
+.card {
+  @apply flex flex-col justify-center items-center text-center px-2.5 py-5 h-32 md:h-48 lg:h-56 rounded-lg box-shadow;
+}
+
+.button-home {
+  @apply text-white rounded px-3.5 py-3 lg:px-5 lg:py-5 cursor-pointer w-full text-sm md:text-xl text-center;
+}

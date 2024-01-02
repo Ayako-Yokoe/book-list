@@ -8,14 +8,19 @@ const HeaderCards = () => {
   }
 
   return (
-    <div>
-      <p>
-        Number of books in my list:
-        {books.length}
-      </p>
-      <p>
-        Next book to read: {books.length > 0 ? books[0].title : "Add a Book"}
-      </p>
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:gap-14">
+      <div className="card bg-green">
+        <p className="pb-2.5 md:text-2xl lg:text-3xl">Books in my list:</p>
+        <p className="text-xl md:text-3xl lg:text-4xl font-semibold">
+          {books.length}
+        </p>
+      </div>
+      <div className="card bg-blue">
+        <p className="pb-2.5 md:text-2xl lg:text-3xl">Next book to read:</p>
+        <p className="text-xl md:text-3xl lg:text-4xl font-semibold">
+          {books.length > 0 ? books[0].title : "Add a Book"}
+        </p>
+      </div>
     </div>
   )
 }
