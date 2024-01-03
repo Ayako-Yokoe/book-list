@@ -90,7 +90,7 @@ const BookList = () => {
       </div>
       <div className="text-center m-8 md:m-12 lg:m-32">
         <h3 className="mb-6 md:text-2xl lg:text-4xl">Your Book List</h3>
-        <ul className="space-y-2.5 md:space-y-4">
+        <ul className="space-y-2.5 md:space-y-4 overflow-y-auto">
           {filteredBooks.map((book: Book) => (
             <Link key={book.id} to={`/${book.id}`}>
               <li className="flex justify-between items-center px-4 py-2.5 shadow-md rounded mb-4 md:px-4 md:py-4">

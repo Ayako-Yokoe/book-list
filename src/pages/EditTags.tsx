@@ -27,23 +27,30 @@ const EditTags = () => {
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          <h1>Edit Tags</h1>
+    <div className="bg-green h-screen flex justify-center">
+      <div className="bg-white w-[300px] md:w-[600px] lg:w-[800px] mx-auto h-fit mb-6 mt-20 md:mt-24 lg:mt-32 rounded shadow-lg">
+        <div className="flex justify-between px-6 py-4 md:px-14 md:py-12 lg:px-16 lg:py-14">
+          <h1 className="md:text-4xl">Edit Tags</h1>
           <Link to="/">
-            <button>&times;</button>
+            <span className="md:text-4xl">&times;</span>
           </Link>
         </div>
-        <div>
+        <hr />
+        <div className="px-6 py-4 md:px-14 md:py-12 lg:px-16 lg:py-14 space-y-4">
           {tags.map((tag) => (
-            <li key={tag.id}>
+            <li key={tag.id} className="list-none flex justify-between">
               <input
                 type="text"
                 defaultValue={tag.label}
                 onChange={(e) => updateTag(tag.id, e)}
+                className="border-2 border-gray-400 rounded px-2"
               />
-              <button onClick={() => deleteTag(tag.id)}>&times;</button>
+              <button
+                onClick={() => deleteTag(tag.id)}
+                className="border-2 border-red-400 rounded cursor-pointer w-10 h-10"
+              >
+                <span className="text-red-400">&times;</span>
+              </button>
             </li>
           ))}
         </div>
