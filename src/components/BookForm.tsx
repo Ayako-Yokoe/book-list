@@ -2,11 +2,14 @@ import { Dispatch, FormEvent, useRef, useState } from "react"
 import CreatableReactSelect from "react-select/creatable"
 import { v4 as uuidv4 } from "uuid"
 import { Link, useNavigate } from "react-router-dom"
-import { useBookContext } from "../context/BookContext"
+import {
+  BookAction,
+  CREATE_BOOK,
+  UPDATE_BOOK,
+  useBookContext,
+} from "../context/BookContext"
 import { Book, Tag } from "../context/BookProvider"
-import { useTagContext } from "../context/TagContext"
-import { BookAction } from "../context/BookProvider"
-import { TagAction } from "../context/TagProvider"
+import { useTagContext, TagAction, CREATE_TAG } from "../context/TagContext"
 
 const BookForm = ({
   id: bookId = "",
@@ -33,15 +36,15 @@ const BookForm = ({
 
   function onAddTag(newTag: Tag): void {
     tagDispatch({
-      type: "create",
+      type: CREATE_TAG,
       payload: newTag,
     })
   }
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    const actionType: "create" | "update" =
-      mode === "edit" ? "update" : "create"
+    const actionType: "CREATE_BOOK" | "UPDATE_BOOK" =
+      mode === "edit" ? UPDATE_BOOK : CREATE_BOOK
 
     bookDispatch({
       type: actionType,
@@ -78,17 +81,17 @@ const BookForm = ({
               onAddTag(newTag)
               setSelectedTags((prev) => [...prev, newTag])
             }}
-            value={selectedTags?.map((tag) => {
-              return { label: tag.label, value: tag.id }
-            })}
-            options={availableTags.map((tag) => {
-              return { label: tag.label, value: tag.id }
-            })}
+            value={selectedTags?.map((tag) => ({
+              label: tag.label,
+              value: tag.id,
+            }))}
+            options={availableTags.map((tag) => ({
+              label: tag.label,
+              value: tag.id,
+            }))}
             onChange={(tags) => {
               setSelectedTags(
-                tags.map((tag) => {
-                  return { label: tag.label, id: tag.value }
-                })
+                tags.map((tag) => ({ label: tag.label, id: tag.value }))
               )
             }}
             isMulti
@@ -119,7 +122,7 @@ const BookForm = ({
           Save
         </button>
         <Link to=".." className="secondary-button">
-          Cancel
+          <span className="text-gray-700">Cancel</span>
         </Link>
       </div>
     </form>

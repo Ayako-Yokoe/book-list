@@ -1,6 +1,11 @@
 import { Dispatch, ReactNode } from "react"
-import { v4 as uuidv4 } from "uuid"
-import BookContext from "./BookContext"
+import BookContext, {
+  BookAction,
+  CREATE_BOOK,
+  DELETE_BOOK,
+  RESTORE_BOOKS,
+  UPDATE_BOOK,
+} from "./BookContext"
 import { useLocalStorageReducer } from "../storage/useLocalStorage"
 
 export type Book = {
@@ -19,17 +24,11 @@ export type Tag = {
   label: string
 }
 
-export type BookAction =
-  | { type: "create"; payload: Book }
-  | { type: "update"; payload: Book }
-  | { type: "delete"; payload: string }
-  | { type: "restore"; payload: Book[] }
-
 const initialState: Book[] = []
 
 function reducer(state: Book[], action: BookAction): Book[] {
   switch (action.type) {
-    case "create":
+    case CREATE_BOOK:
       return [
         ...state,
         {
@@ -40,7 +39,7 @@ function reducer(state: Book[], action: BookAction): Book[] {
           tags: action.payload.tags,
         },
       ]
-    case "update":
+    case UPDATE_BOOK:
       return state.map((data) => {
         if (data.id === action.payload.id) {
           return {
@@ -54,9 +53,9 @@ function reducer(state: Book[], action: BookAction): Book[] {
           return data
         }
       })
-    case "delete":
+    case DELETE_BOOK:
       return state.filter((data) => data.id !== action.payload)
-    case "restore":
+    case RESTORE_BOOKS:
       return action.payload
     default:
       return state

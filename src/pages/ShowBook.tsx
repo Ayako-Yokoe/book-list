@@ -1,8 +1,7 @@
 import { Dispatch } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useBook } from "./BookLayout"
-import { useBookContext } from "../context/BookContext"
-import { BookAction } from "../context/BookProvider"
+import { BookAction, DELETE_BOOK, useBookContext } from "../context/BookContext"
 
 const ShowBook = () => {
   const { id, title, author, memo, tags } = useBook()
@@ -12,7 +11,7 @@ const ShowBook = () => {
   const navigate = useNavigate()
 
   const handleDelete = () => {
-    dispatch({ type: "delete", payload: id })
+    dispatch({ type: DELETE_BOOK, payload: id })
     navigate("/")
   }
 
@@ -21,19 +20,19 @@ const ShowBook = () => {
       <div className="grid grid-cols-3">
         <Link
           to=".."
-          className="bg-indigoSecondary rounded text-white text-center py-2 md:py-4 md:tex-xl cursor-pointer"
+          className="bg-indigo-secondary rounded text-white text-center py-2 md:py-4 md:text-xl cursor-pointer"
         >
           Back
         </Link>
       </div>
-      <div className="bg-orange rounded-lg box-shadow mt-8 xl:mt-9 px-10 py-9  md:px-12 md:py-10 space-y-4 min-h-80 md:min-h-[540px] lg:min-h-[590px]">
+      <div className="bg-orange rounded-lg box-shadow mt-8 xl:mt-9 px-10 py-9 md:px-12 md:py-10 space-y-4 min-h-80 md:min-h-[540px] lg:min-h-[590px]">
         <h3 className="text-xl md:text-3xl lg:text-4xl">{title}</h3>
         {tags.length > 0 && (
           <div className="flex flex-wrap">
             {tags.map((tag) => (
               <div
                 key={tag.id}
-                className="bg-green rounded border-2 border-gray-400 mr-1.5"
+                className="bg-green rounded border border-black mr-1.5"
               >
                 <span className="text-xs md:text-sm lg:text-base px-3.5 py-2 lg:px-4.5 lg:py-3">
                   {tag.label}
@@ -50,7 +49,7 @@ const ShowBook = () => {
           Edit
         </Link>
         <button onClick={handleDelete} className="secondary-button">
-          Delete
+          <span className="text-gray-700">Delete</span>
         </button>
       </div>
     </div>
@@ -58,3 +57,5 @@ const ShowBook = () => {
 }
 
 export default ShowBook
+
+// checked

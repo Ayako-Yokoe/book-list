@@ -1,5 +1,11 @@
 import { Dispatch, ReactNode } from "react"
-import TagContext from "./TagContext"
+import TagContext, {
+  CREATE_TAG,
+  DELETE_TAG,
+  RESTORE_TAGS,
+  TagAction,
+  UPDATE_TAG,
+} from "./TagContext"
 import { useLocalStorageReducer } from "../storage/useLocalStorage"
 
 export type Tag = {
@@ -7,19 +13,13 @@ export type Tag = {
   label: string
 }
 
-export type TagAction =
-  | { type: "create"; payload: Tag }
-  | { type: "update"; payload: Tag }
-  | { type: "delete"; payload: string }
-  | { type: "restore"; payload: Tag[] }
-
 const initialState: Tag[] = []
 
 function reducer(state: Tag[], action: TagAction): Tag[] {
   switch (action.type) {
-    case "create":
+    case CREATE_TAG:
       return [...state, { id: action.payload.id, label: action.payload.label }]
-    case "update":
+    case UPDATE_TAG:
       return state.map((data) => {
         if (data.id === action.payload.id) {
           return {
@@ -30,9 +30,9 @@ function reducer(state: Tag[], action: TagAction): Tag[] {
           return data
         }
       })
-    case "delete":
+    case DELETE_TAG:
       return state.filter((data) => data.id !== action.payload)
-    case "restore":
+    case RESTORE_TAGS:
       return action.payload
     default:
       return state

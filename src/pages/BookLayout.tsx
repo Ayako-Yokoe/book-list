@@ -1,16 +1,20 @@
-import { Navigate, Outlet, useOutletContext, useParams } from "react-router-dom"
-import { useBookContext, BookContextType } from "../context/BookContext"
-import { Book, BookAction } from "../context/BookProvider"
 import { Dispatch } from "react"
+import { Navigate, Outlet, useOutletContext, useParams } from "react-router-dom"
+import {
+  useBookContext,
+  BookAction,
+  BookContextType,
+} from "../context/BookContext"
+import { Book } from "../context/BookProvider"
 
 export function BookLayout() {
-  const { id } = useParams()
+  const { id } = useParams<{ id?: string }>()
   const { books }: BookContextType = useBookContext() || {
     books: [],
     dispatch: () => {},
   }
 
-  const book = books.filter((book) => book.id === id)[0]
+  const book = books.find((b) => b.id === id)
 
   if (!book) return <Navigate to="/" replace />
 

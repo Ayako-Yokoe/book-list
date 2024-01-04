@@ -1,7 +1,12 @@
 import { Dispatch, FormEvent } from "react"
-import { useTagContext } from "../context/TagContext"
-import { Tag, TagAction } from "../context/TagProvider"
 import { Link } from "react-router-dom"
+import {
+  useTagContext,
+  TagAction,
+  UPDATE_TAG,
+  DELETE_TAG,
+} from "../context/TagContext"
+import { Tag } from "../context/TagProvider"
 
 const EditTags = () => {
   const { tags, dispatch } = useTagContext() as {
@@ -11,7 +16,7 @@ const EditTags = () => {
 
   function updateTag(id: string, e: FormEvent<HTMLInputElement>): void {
     dispatch({
-      type: "update",
+      type: UPDATE_TAG,
       payload: {
         id,
         label: e.currentTarget.value,
@@ -21,7 +26,7 @@ const EditTags = () => {
 
   function deleteTag(id: string): void {
     dispatch({
-      type: "delete",
+      type: DELETE_TAG,
       payload: id,
     })
   }
@@ -32,7 +37,7 @@ const EditTags = () => {
         <div className="flex justify-between px-6 py-4 md:px-14 md:py-12 lg:px-16 lg:py-14">
           <h1 className="md:text-4xl">Edit Tags</h1>
           <Link to="/">
-            <span className="md:text-4xl">&times;</span>
+            <span className="text-2xl md:text-4xl">&times;</span>
           </Link>
         </div>
         <hr />
@@ -43,13 +48,13 @@ const EditTags = () => {
                 type="text"
                 defaultValue={tag.label}
                 onChange={(e) => updateTag(tag.id, e)}
-                className="border-2 border-gray-400 rounded px-2"
+                className="border border-gray-700 rounded px-2 mr-2 w-full md:text-2xl"
               />
               <button
                 onClick={() => deleteTag(tag.id)}
                 className="border-2 border-red-400 rounded cursor-pointer w-10 h-10"
               >
-                <span className="text-red-400">&times;</span>
+                <span className="text-red-400 md:text-2xl">&times;</span>
               </button>
             </li>
           ))}
