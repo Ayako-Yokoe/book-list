@@ -5,7 +5,7 @@ import { Book } from "../context/BookProvider"
 import { useTagContext, TagContextType } from "../context/TagContext"
 import { Tag } from "../context/TagProvider"
 import CreatableReactSelect from "react-select/creatable"
-import { ActionMeta, MultiValue } from "react-select"
+import { MultiValue } from "react-select"
 
 type SelectValue = { label: string; value: string }
 
@@ -67,10 +67,7 @@ const BookList = () => {
             value: tag.id,
           }))}
           options={tags.map((tag) => ({ label: tag.label, value: tag.id }))}
-          onChange={(
-            newTags: MultiValue<SelectValue>,
-            actionMeta: ActionMeta<SelectValue>
-          ): void => {
+          onChange={(newTags: MultiValue<SelectValue>): void => {
             if (newTags) {
               setSelectedTags(
                 newTags.map((tag) => ({ label: tag.label, id: tag.value }))
