@@ -20,8 +20,7 @@ I developed the Book_List app to explore and make full use of React Hooks: speci
 
 ## Page Overview
 
-<!-- ![screen-gif](./README-book-list.gif) -->
-<img src="./README-book-list.gif" width="100" />
+<img src="./README-book-list.gif" width="250" />
 
 **Home**<br/>
 The Home page presents the user's book list, displayed at the bottom. A card at the top showcases the total number of books in the list. Additionally, a recommended book, which is the first in the list, is featured at the top. The integration of useContext and useReducer enhances state management.<br/>
