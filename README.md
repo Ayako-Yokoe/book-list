@@ -20,7 +20,7 @@ I developed the Book_List app to explore and make full use of React Hooks: speci
 
 ## Page Overview
 
-<img src="./README-book-list-image.gif" width="250" />
+<img src="./README-book-list-image.jpeg" width="250" />
 <br/>
 <br/>
 <br/>
