@@ -2,7 +2,7 @@
 
 ## About this app
 
-I developed the Book_List app to explore and make full use of React Hooks: specifically useContext and useReducer. For an in-depth understanding of these hooks, you can refer to my blogs posts linked below. Additionally, I elevated the project by incorporating TypeScript, enhancing the application's type safety and robustness.
+I developed the Book_List app to explore and make full use of React Hooks: specifically useContext and useReducer. For an in-depth understanding of these hooks, you can refer to my blog posts linked below. Additionally, I elevated the project by incorporating TypeScript, enhancing the application's type safety and robustness.
 
 [Understanding React useContext](https://dev.to/ayako_yk/understanding-react-usecontext-2bch)<br/>
 [Understanding React useReducer](https://dev.to/ayako_yk/understanding-react-usereducer-1cb2)<br/>
